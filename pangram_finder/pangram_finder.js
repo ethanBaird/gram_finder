@@ -1,6 +1,6 @@
 const PangramFinder = function (phrase) {
   this.alphabet = 'qwertyuiopasdfghjklzxcvbnm'.split('');
-  this.phrase = phrase.split('');
+  this.phrase = phrase.replace(/[^a-zA-Z]/g,'').split('');
 }
 
 PangramFinder.prototype.sortPhrase = function (phrase) {
@@ -36,9 +36,12 @@ PangramFinder.prototype.isPangram = function () {
   fixedPhrase = [...new Set(fixedPhrase)];
   console.log(fixedPhrase);
 
+ 
+
   // filter out spaces
   fixedPhrase = fixedPhrase.filter(character => character !== ' ')
   console.log(fixedPhrase);
+
 
   // sort phrases reverse alphabetical
   fixedAlphabet = this.sortPhrase(fixedAlphabet);
