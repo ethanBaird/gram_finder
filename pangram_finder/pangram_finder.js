@@ -20,16 +20,32 @@ PangramFinder.prototype.sortPhrase = function (phrase) {
 }
 
 PangramFinder.prototype.toUpperCase = function (phrase) {
-  return this.words.map(phrase => phrase.toUpperCase())
+  return phrase.map(character => character.toUpperCase())
 }
 
 PangramFinder.prototype.isPangram = function () {
-  const sortedAlphabet = this.sortPhrase(this.alphabet);
-  const sortedPhrase = this.sortPhrase(this.phrase);
-  let uniqueSortedPhrase = [...new Set(sortedPhrase)];
-  uniqueSortedPhrase.pop()
-  // console.log(uniqueSortedPhrase);
-  if (sortedAlphabet.length === uniqueSortedPhrase.length && sortedAlphabet.every((v, i) => v === uniqueSortedPhrase[i])) {
+  let fixedPhrase = this.phrase;
+  let fixedAlphabet = this.alphabet;
+
+  // make elements upper case
+  fixedPhrase = this.toUpperCase(fixedPhrase)
+  fixedAlphabet = this.toUpperCase(fixedAlphabet)
+  console.log(fixedPhrase);
+
+  // get unique elements of phrase
+  fixedPhrase = [...new Set(fixedPhrase)];
+  console.log(fixedPhrase);
+
+  // filter out spaces
+  fixedPhrase = fixedPhrase.filter(character => character !== ' ')
+  console.log(fixedPhrase);
+
+  // sort phrases reverse alphabetical
+  fixedAlphabet = this.sortPhrase(fixedAlphabet);
+  fixedPhrase = this.sortPhrase(fixedPhrase);
+  console.log(fixedPhrase);
+  
+  if (fixedAlphabet.length === fixedPhrase.length && fixedAlphabet.every((v, i) => v === fixedPhrase[i])) {
     return true
   }
   else {
